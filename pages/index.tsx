@@ -13,6 +13,7 @@ import {BASE_URL, IMAGE, NAME} from "../constants";
 import Navbar from "../components/nav";
 import { Inter } from 'next/font/google'
 import useKeypress from "react-use-keypress";
+import {Footer} from "../components/footer";
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -96,9 +97,9 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
             ))}
           </div>
         </main>
-        <footer className="p-6 text-center text-white/80 sm:p-12">
-
-        </footer>
+        <div className="py-8 md:py-12 pb-0 px-4 sm:px-6 lg:pl-52 mb-8 md:mb-0">
+          <Footer/>
+        </div>
       </ div>
     </>
   );
