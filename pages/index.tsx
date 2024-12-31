@@ -32,7 +32,7 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
     }
   }, [photoId, lastViewedPhoto, setLastViewedPhoto]);
 
-  function closeModal() {
+  const closeModal = function() {
     setLastViewedPhoto(photoId);
     router.push("/", undefined, { shallow: true });
   }
