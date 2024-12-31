@@ -69,7 +69,7 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
                   onClose={closeModal}
               />
           )}
-          <div className="columns-1 gap-4 sm:columns-2 xl:columns-3 2xl:columns-4">
+          <div className="columns-1 gap-4 sm:columns-2 xl:columns-3 2xl:columns-4 xl:mx-40 mx-5">
             {images.map(({id, public_id, format, blurDataUrl}) => (
                 <Link
                     key={id}
