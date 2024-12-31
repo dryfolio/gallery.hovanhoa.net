@@ -11,8 +11,9 @@ import type { ImageProps } from "../utils/types";
 import { useLastViewedPhoto } from "../utils/useLastViewedPhoto";
 import {BASE_URL, IMAGE, NAME} from "../constants";
 import Navbar from "../components/nav";
-import Hero from "../components/hero";
 import { Inter } from 'next/font/google'
+import useKeypress from "react-use-keypress";
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -30,6 +31,15 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
       setLastViewedPhoto(null);
     }
   }, [photoId, lastViewedPhoto, setLastViewedPhoto]);
+
+  function closeModal() {
+    setLastViewedPhoto(photoId);
+    router.push("/", undefined, { shallow: true });
+  }
+
+  useKeypress("Escape", () => {
+    closeModal();
+  });
 
   return (
     <>
@@ -55,9 +65,7 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
           {photoId && (
               <Modal
                   images={images}
-                  onClose={() => {
-                    setLastViewedPhoto(photoId);
-                  }}
+                  closeModal={closeModal}
               />
           )}
           <div className="columns-1 gap-4 sm:columns-2 xl:columns-3 2xl:columns-4">
