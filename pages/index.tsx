@@ -65,7 +65,7 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
           {photoId && (
               <Modal
                   images={images}
-                  closeModal={closeModal}
+                  onClose={closeModal}
               />
           )}
           <div className="columns-1 gap-4 sm:columns-2 xl:columns-3 2xl:columns-4">
