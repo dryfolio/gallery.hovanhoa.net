@@ -2,6 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 import { BASE_URL } from '../constants'
 
+
 export default function _404() {
     return (
         <div className="grid h-screen place-content-center bg-background px-4 text-center gap-5">
