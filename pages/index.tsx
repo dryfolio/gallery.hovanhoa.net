@@ -14,6 +14,7 @@ import Navbar from "../components/nav";
 import { Inter } from 'next/font/google'
 import useKeypress from "react-use-keypress";
 import {Footer} from "../components/footer";
+import { Analytics } from "@vercel/analytics/react"
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -101,6 +102,7 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
           <Footer/>
         </div>
       </ div>
+      <Analytics/>
     </>
   );
 };
