@@ -6,7 +6,7 @@ export default async function getResults() {
   if (!cachedResults) {
     const fetchedResults = await cloudinary.v2.search
       .expression(`folder:${process.env.CLOUDINARY_FOLDER}/*`)
-      .sort_by("public_id", "desc")
+      .sort_by("uploaded_at", "desc")
       .max_results(400)
       .execute();
 
