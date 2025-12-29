@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
-import {BASE_URL, INSIGHT_URL, GALLERY_URL} from "../constants";
+import {BASE_URL, INSIGHT_URL, GALLERY_URL, STATUS_URL} from "../constants";
 
 export default function Navbar() {
     return (
@@ -24,6 +24,12 @@ export default function Navbar() {
                         href={GALLERY_URL}
                     >
                         Gallery
+                    </Link>
+                    <Link
+                        className="hover:underline hover:decoration-wavy hover:underline-offset-8 transition duration-300 ease-in-out"
+                        href={STATUS_URL}
+                    >
+                        Status
                     </Link>
                 </ul>
             </nav>
