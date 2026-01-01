@@ -25,12 +25,6 @@ export default function Navbar() {
                     >
                         Gallery
                     </Link>
-                    <Link
-                        className="hover:underline hover:decoration-wavy hover:underline-offset-8 transition duration-300 ease-in-out"
-                        href={STATUS_URL}
-                    >
-                        Status
-                    </Link>
                 </ul>
             </nav>
         </header>
