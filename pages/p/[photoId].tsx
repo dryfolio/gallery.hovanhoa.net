@@ -18,8 +18,35 @@ const Home: NextPage = ({ currentPhoto }: { currentPhoto: ImageProps }) => {
     <>
       <Head>
         <title>hovanhoa | gallery</title>
+        <meta
+          name="description"
+          content="Hồ Văn Hòa - Software Engineer. Photo from hovanhoa gallery."
+        />
+        <meta
+          name="keywords"
+          content="Hồ Văn Hòa, hovanhoa, gallery, photos, pictures, photography, Software Engineer, Developer"
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`https://gallery.hovanhoa.net/p/${photoId}`} />
+        <meta property="og:title" content="hovanhoa | gallery" />
+        <meta
+          property="og:description"
+          content="Hồ Văn Hòa - Software Engineer. Photo from hovanhoa gallery."
+        />
         <meta property="og:image" content={currentPhotoUrl} />
+        <meta property="og:image:width" content={currentPhoto.width?.toString() || "1200"} />
+        <meta property="og:image:height" content={currentPhoto.height?.toString() || "800"} />
+        <meta property="og:image:alt" content="Hồ Văn Hòa - Gallery Photo" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@_hovanhoa_" />
+        <meta name="twitter:creator" content="@_hovanhoa_" />
+        <meta name="twitter:title" content="hovanhoa | gallery" />
+        <meta
+          name="twitter:description"
+          content="Hồ Văn Hòa - Software Engineer. Photo from hovanhoa gallery."
+        />
         <meta name="twitter:image" content={currentPhotoUrl} />
+        <link rel="canonical" href={`https://gallery.hovanhoa.net/p/${photoId}`} />
       </Head>
       <main className="mx-auto max-w-[1960px] p-4">
         <Carousel currentPhoto={currentPhoto} index={index} />

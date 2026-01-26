@@ -47,6 +47,24 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
     <>
       <Head>
         <title>hovanhoa | gallery</title>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'CollectionPage',
+              name: 'hovanhoa | gallery',
+              url: 'https://gallery.hovanhoa.net',
+              description: 'Hồ Văn Hòa - Software Engineer. See pictures and photos from hovanhoa | gallery.',
+              author: {
+                '@type': 'Person',
+                name: 'Hồ Văn Hòa',
+                alternateName: 'hovanhoa',
+                jobTitle: 'Software Engineer',
+              },
+            }),
+          }}
+        />
       </Head>
       <div className={inter.className}>
         <main className="min-h-screen relative pt-8">
