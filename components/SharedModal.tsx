@@ -146,7 +146,7 @@ export default function SharedModal({
                   onClick={() =>
                     downloadPhoto(
                       `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${currentImage.public_id}.${currentImage.format}`,
-                      `${index}.jpg`,
+                      `hovanhoa_${index}.${currentImage.format}`,
                     )
                   }
                   className="rounded-full bg-black/50 p-2 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white"
