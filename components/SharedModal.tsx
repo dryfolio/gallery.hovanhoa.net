@@ -8,7 +8,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion, MotionConfig } from "framer-motion";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
 import { variants } from "../utils/animationVariants";
 import downloadPhoto from "../utils/downloadPhoto";
@@ -26,6 +26,11 @@ export default function SharedModal({
   direction,
 }: SharedModalProps) {
   const [loaded, setLoaded] = useState(false);
+
+  // Reset loaded state when index changes to ensure smooth transitions
+  useEffect(() => {
+    setLoaded(false);
+  }, [index]);
 
   let filteredImages = images?.filter((img: ImageProps) =>
     range(index - 15, index + 15).includes(img.id),
@@ -50,8 +55,8 @@ export default function SharedModal({
   return (
     <MotionConfig
       transition={{
-        x: { type: "spring", stiffness: 300, damping: 30 },
-        opacity: { duration: 0.2 },
+        x: { type: "tween", duration: 0.4, ease: [0.25, 0.1, 0.25, 1] },
+        opacity: { duration: 0.3 },
       }}
     >
       <div
