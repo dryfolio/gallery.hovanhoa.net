@@ -1,0 +1,18 @@
+---
+description: Core project and agent standards for gallery.hovanhoa.net
+alwaysApply: true
+---
+
+# Core Agent & Project Rules
+
+- **Architecture loop**: Prefer a flow of `research (docs/web) -> update config/static data -> implement OOP code -> run tests`, and iterate on failures.
+- **Strict OOP**: Centralize configuration, prompts, API keys, and environment constants in dedicated config modules (e.g. `config.py` / similar) rather than scattering literals through logic.
+- **No hardcoded strings in logic**: When you introduce new user-facing or system strings that are reused or semantically important, move them into a config/static container and reference them there.
+- **Isolation**: When suggesting Python tooling or environments, use per-project virtual environments (e.g. `python3 -m venv venv && source venv/bin/activate`) and avoid global installs.
+- **Clean helpers**: Use small, focused helper functions or utility modules for OS, terminal, and I/O interactions; keep core logic classes free of low-level shell details.
+- **Looped testing mindset**: Encourage running automated tests (e.g. `pytest` or framework equivalents) as the validation step in the loop; on failures, prefer to adjust config/static knowledge or logic and re-run tests.
+
+# Cursor-Specific Behaviour
+
+- **.cursor usage**: Treat this directory as the source of truth for persistent project rules and avoid duplicating them in ad-hoc markdown docs in the repo.
+- **Code over prose**: Prefer implementing conventions directly in code (types, helpers, abstractions) rather than long narrative documentation.
