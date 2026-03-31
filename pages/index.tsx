@@ -67,15 +67,15 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
         />
       </Head>
       <div className={inter.className}>
-        <main className="min-h-screen relative pt-8">
-          <section className="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 overflow-hidden mb-10">
-            <div className="items-center flex justify-between mb-6">
+        <main className="min-h-screen relative">
+          <section className="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 overflow-hidden mb-4 sm:mb-6">
+            <div className="items-center flex justify-between gap-2 sm:gap-0">
               <Link href={BASE_URL}>
                 <div className="border border-slate-200 p-1 rounded-full">
                   <Image
                     src={IMAGE}
                     alt={NAME}
-                    className="h-12 w-12 rounded-full"
+                    className="h-10 w-10 sm:h-12 sm:w-12 rounded-full"
                     height={100}
                     width={100}
                   />
@@ -118,7 +118,7 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
             ))}
           </div>
         </main>
-        <div className="py-8 md:py-12 pb-0 px-4 sm:px-6 lg:pl-52 mb-8 md:mb-0">
+        <div className="py-6 sm:py-8 md:py-12 pb-0 px-4 sm:px-6 lg:pl-52 mb-8 md:mb-0">
           <Footer/>
         </div>
       </ div>
