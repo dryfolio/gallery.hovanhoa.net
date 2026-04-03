@@ -23,6 +23,15 @@ CLOUDINARY_API_SECRET=
 CLOUDINARY_FOLDER=    # Cloudinary folder path containing gallery images
 ```
 
+### Build cache
+
+`utils/images.cache.json` caches the Cloudinary image list. If present, the build uses it instead of calling the Cloudinary API — useful when the build environment (e.g., Vercel) has unreliable network access to Cloudinary.
+
+To refresh the cache locally:
+```bash
+node -e "const c=require('cloudinary');c.v2.config({cloud_name:'<NAME>',api_key:'<KEY>',api_secret:'<SECRET>',secure:true});c.v2.search.expression('folder:<FOLDER>/*').sort_by('filename','desc').max_results(400).execute().then(r=>{require('fs').writeFileSync('utils/images.cache.json',JSON.stringify(r));console.log('Cached',r.total_count,'images')})"
+```
+
 ## Architecture
 
 This is a personal photography gallery (hovanhoa.net) built with Next.js using **Static Site Generation (SSG)**. Images are fetched from Cloudinary at build time — there is no runtime API.
