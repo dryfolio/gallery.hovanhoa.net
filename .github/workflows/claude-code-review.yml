@@ -46,9 +46,7 @@ jobs:
             Be constructive and helpful in your feedback.
 
           # Optional: Supply CLI flags for models, max turns, system prompts, tool access, etc.
-          claude_args: |
-            --model claude-sonnet-4-5-20250929
-          #   --allowedTools Bash(npm run test),Bash(npm run lint),Bash(npm run typecheck)
+          claude_args: "--model claude-sonnet-4-5-20250929"
 
           # Optional: Use sticky comments to make Claude reuse the same comment on subsequent pushes to the same PR
           # use_sticky_comment: true
