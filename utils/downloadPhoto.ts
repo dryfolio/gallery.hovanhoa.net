@@ -1,5 +1,5 @@
 function forceDownload(blobUrl: string, filename: string) {
-  let a: any = document.createElement("a");
+  const a = document.createElement("a");
   a.download = filename;
   a.href = blobUrl;
   document.body.appendChild(a);
@@ -7,8 +7,8 @@ function forceDownload(blobUrl: string, filename: string) {
   a.remove();
 }
 
-export default function downloadPhoto(url: string, filename: string) {
-  if (!filename) filename = url.split("\\").pop().split("/").pop();
+export default function downloadPhoto(url: string, filename?: string) {
+  const name = filename || url.split("\\").pop()?.split("/").pop() || "photo";
   fetch(url, {
     headers: new Headers({
       Origin: location.origin,
@@ -17,8 +17,8 @@ export default function downloadPhoto(url: string, filename: string) {
   })
     .then((response) => response.blob())
     .then((blob) => {
-      let blobUrl = window.URL.createObjectURL(blob);
-      forceDownload(blobUrl, filename);
+      const blobUrl = window.URL.createObjectURL(blob);
+      forceDownload(blobUrl, name);
     })
     .catch((e) => console.error(e));
 }
