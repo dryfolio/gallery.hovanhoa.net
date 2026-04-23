@@ -1,23 +1,39 @@
 import Link from 'next/link'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { BASE_URL } from '../constants'
 import { ArrowUpIcon } from '@heroicons/react/24/outline'
 
 export function Footer() {
     const [showScroll, setShowScroll] = useState(false)
+    const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
     useEffect(() => {
         const checkScrollTop = () => {
-            if (!showScroll && window.scrollY > 400) {
+            if (window.scrollY > 400) {
                 setShowScroll(true)
-            } else if (showScroll && window.scrollY <= 400) {
+                if (hideTimeoutRef.current) {
+                    clearTimeout(hideTimeoutRef.current)
+                }
+                hideTimeoutRef.current = setTimeout(() => {
+                    setShowScroll(false)
+                }, 1000)
+            } else {
                 setShowScroll(false)
+                if (hideTimeoutRef.current) {
+                    clearTimeout(hideTimeoutRef.current)
+                    hideTimeoutRef.current = null
+                }
             }
         }
 
         window.addEventListener('scroll', checkScrollTop)
-        return () => window.removeEventListener('scroll', checkScrollTop)
-    }, [showScroll])
+        return () => {
+            window.removeEventListener('scroll', checkScrollTop)
+            if (hideTimeoutRef.current) {
+                clearTimeout(hideTimeoutRef.current)
+            }
+        }
+    }, [])
 
     const scrollToTop = () => {
         window.scrollTo({
