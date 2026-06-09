@@ -9,15 +9,11 @@ import cloudinary from "../utils/cloudinary";
 import getBase64ImageUrl from "../utils/generateBlurPlaceholder";
 import type { ImageProps } from "../utils/types";
 import { useLastViewedPhoto } from "../utils/useLastViewedPhoto";
-import {BASE_URL, IMAGE, NAME} from "../constants";
 import Navbar from "../components/nav";
-import { Inter } from 'next/font/google'
+import { Eyebrow } from "../components/redesign/eyebrow";
 import useKeypress from "react-use-keypress";
 import {Footer} from "../components/footer";
 import { Analytics } from "@vercel/analytics/react"
-
-
-const inter = Inter({ subsets: ['latin'] })
 
 const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
   const router = useRouter();
@@ -66,31 +62,39 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
           }}
         />
       </Head>
-      <div className={inter.className}>
-        <main className="min-h-screen relative">
-          <section className="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 overflow-hidden mb-4 sm:mb-6">
-            <div className="items-center flex justify-between gap-2 sm:gap-0">
-              <Link href={BASE_URL}>
-                <div className="border border-slate-200 p-1 rounded-full">
-                  <Image
-                    src={IMAGE}
-                    alt={NAME}
-                    className="h-10 w-10 sm:h-12 sm:w-12 rounded-full"
-                    height={100}
-                    width={100}
-                  />
-                </div>
-              </Link>
+      <div>
+        {!photoId && (
+          <header className="sticky top-0 z-50 border-b border-[var(--rd-border-2)] bg-[var(--rd-bg-sub)] shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
+            <div className="mx-auto w-full max-w-[var(--rd-maxw)] px-[var(--rd-pad)] py-3">
               <Navbar/>
             </div>
-          </section>
+          </header>
+        )}
+        <main className="min-h-screen relative">
+          <div
+            className="border-b border-[var(--rd-border)]"
+            style={{
+              background:
+                'radial-gradient(100% 140% at 0% 0%, var(--rd-accent-bg), transparent 55%), var(--rd-surface-2)',
+            }}
+          >
+            <div className="px-[var(--rd-pad)] pt-12 pb-12">
+              <Eyebrow>hovanhoa · gallery</Eyebrow>
+              <h1 className="mt-[18px] text-[clamp(2rem,4.6vw,3.4rem)] font-semibold tracking-[-0.04em] text-[var(--rd-text)]">
+                photographs
+              </h1>
+              <p className="rd-lead mt-5">
+                a running collection of moments i&apos;ve pointed a camera at.
+              </p>
+            </div>
+          </div>
           {photoId && (
               <Modal
                   images={images}
                   onClose={closeModal}
               />
           )}
-          <div className="columns-1 gap-4 sm:columns-2 xl:columns-3 2xl:columns-4 xl:mx-40 mx-5">
+          <div className="mt-12 columns-1 gap-4 px-[var(--rd-pad)] sm:columns-2 lg:columns-3 xl:columns-4 2xl:columns-5">
             {images.map(({id, public_id, format, blurDataUrl}) => (
                 <Link
                     key={id}
@@ -118,9 +122,7 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
             ))}
           </div>
         </main>
-        <div className="py-6 sm:py-8 md:py-12 pb-0 px-4 sm:px-6 lg:pl-52 mb-8 md:mb-0">
-          <Footer/>
-        </div>
+        <Footer/>
       </ div>
       <Analytics/>
     </>
