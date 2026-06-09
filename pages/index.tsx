@@ -78,7 +78,7 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
                 'radial-gradient(100% 140% at 0% 0%, var(--rd-accent-bg), transparent 55%), var(--rd-surface-2)',
             }}
           >
-            <div className="px-[var(--rd-pad)] pt-12 pb-12">
+            <div className="mx-auto max-w-[var(--rd-maxw)] px-[var(--rd-pad)] pt-12 pb-12">
               <Eyebrow>hovanhoa · gallery</Eyebrow>
               <h1 className="mt-[18px] text-[clamp(2rem,4.6vw,3.4rem)] font-semibold tracking-[-0.04em] text-[var(--rd-text)]">
                 photographs
@@ -94,7 +94,7 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
                   onClose={closeModal}
               />
           )}
-          <div className="mt-12 columns-1 gap-4 px-[var(--rd-pad)] sm:columns-2 lg:columns-3 xl:columns-4 2xl:columns-5">
+          <div className="mx-auto mt-12 max-w-[var(--rd-maxw)] columns-1 gap-4 px-[var(--rd-pad)] sm:columns-2 lg:columns-3 xl:columns-4">
             {images.map(({id, public_id, format, blurDataUrl}) => (
                 <Link
                     key={id}
