@@ -43,7 +43,7 @@ module.exports = {
     },
     extend: {
       colors: {
-        primary: "#0ea5e9",
+        primary: "#d8602f",
         // light mode
         tremor: {
           brand: {

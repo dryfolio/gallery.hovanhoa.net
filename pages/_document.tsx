@@ -38,8 +38,13 @@ class MyDocument extends Document {
             content="Hồ Văn Hòa - Software Engineer. See pictures and photos from hovanhoa | gallery."
           />
           <meta name="twitter:image" content="https://gallery.hovanhoa.net/avatar.png" />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `(function(){try{var t=localStorage.getItem('theme');var d=t?t==='dark':window.matchMedia('(prefers-color-scheme:dark)').matches;if(d)document.documentElement.classList.add('dark')}catch(e){}})()`,
+            }}
+          />
         </Head>
-        <body className="bg-white antialiased container mx-auto">
+        <body className="antialiased">
           <Main />
           <NextScript />
         </body>
