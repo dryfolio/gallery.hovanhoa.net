@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 const {blue, gray, white} = require("tailwindcss/colors");
 module.exports = {
+  darkMode: "class",
   future: {
     hoverOnlyWhenSupported: true,
   },
