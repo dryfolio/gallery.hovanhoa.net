@@ -44,7 +44,7 @@ class MyDocument extends Document {
             }}
           />
         </Head>
-        <body className="antialiased">
+        <body>
           <Main />
           <NextScript />
         </body>
