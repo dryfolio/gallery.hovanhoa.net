@@ -11,10 +11,16 @@ export default async function getBase64ImageUrl(
   if (url) {
     return url;
   }
-  const response = await fetch(
-    `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/f_jpg,w_8,q_70/${image.public_id}.${image.format}`,
-  );
-  const buffer = await response.arrayBuffer();
+  let buffer: ArrayBuffer;
+  try {
+    const response = await fetch(
+      `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/f_jpg,w_8,q_70/${image.public_id}.${image.format}`,
+    );
+    buffer = await response.arrayBuffer();
+  } catch {
+    // DIAG: tolerate offline blur fetch so the page can render locally
+    return "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+  }
   const minified = await imagemin.buffer(Buffer.from(buffer), {
     plugins: [imageminJpegtran()],
   });
