@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 
 const HOME = 'https://hovanhoa.net'
 
@@ -57,35 +57,6 @@ function Section({ title, links }: FooterSection) {
 }
 
 export function Footer() {
-    const [showScroll, setShowScroll] = useState(false)
-    const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null)
-
-    useEffect(() => {
-        const checkScrollTop = () => {
-            if (window.scrollY > 400) {
-                setShowScroll(true)
-                if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current)
-                hideTimeoutRef.current = setTimeout(
-                    () => setShowScroll(false),
-                    1000
-                )
-            } else {
-                setShowScroll(false)
-                if (hideTimeoutRef.current) {
-                    clearTimeout(hideTimeoutRef.current)
-                    hideTimeoutRef.current = null
-                }
-            }
-        }
-        window.addEventListener('scroll', checkScrollTop)
-        return () => {
-            window.removeEventListener('scroll', checkScrollTop)
-            if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current)
-        }
-    }, [])
-
-    const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
-
     return (
         <footer
             className="mt-28 border-t border-[var(--rd-border)]"
@@ -132,29 +103,6 @@ export function Footer() {
                     </p>
                 </div>
             </div>
-
-            {showScroll && (
-                <button
-                    onClick={scrollToTop}
-                    className="fixed bottom-8 left-8 z-50 rounded-full bg-white p-3 text-slate-900 shadow-lg transition-all duration-300 hover:bg-slate-100"
-                    aria-label="Scroll to top"
-                >
-                    <svg
-                        className="h-6 w-6"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M5 10l7-7m0 0l7 7m-7-7v18"
-                        />
-                    </svg>
-                </button>
-            )}
         </footer>
     )
 }
