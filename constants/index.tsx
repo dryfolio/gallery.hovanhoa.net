@@ -7,6 +7,7 @@ const GALLERY_URL = 'https://gallery.hovanhoa.net'
 const MUSIC_URL = 'https://music.hovanhoa.net'
 const STATUS_URL = 'https://status.hovanhoa.net'
 const INFO_URL = 'https://info.hovanhoa.net'
+const BOOK_URL = 'https://book.hovanhoa.net'
 const TWITTER = '_hovanhoa_'
 const LINKEDIN = 'hovanhoa'
 const GITHUB = 'hovanhoa'
@@ -85,5 +86,6 @@ export {
     MUSIC_URL,
     STATUS_URL,
     INFO_URL,
+    BOOK_URL,
     ROLE,
 }
