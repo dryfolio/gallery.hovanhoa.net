@@ -1,10 +1,19 @@
-import { GetServerSideProps } from 'next'
+import fs from 'fs'
+import path from 'path'
 import { GALLERY_URL, BASE_URL, INSIGHT_URL } from '../constants'
 import getResults from '../utils/cachedImages'
 
 const INFO_URL = 'https://info.hovanhoa.net'
 const STATUS_URL = 'https://status.hovanhoa.net'
 const MUSIC_URL = 'https://music.hovanhoa.net'
+
+function generateRobots() {
+  return `User-agent: *
+Allow: /
+Sitemap: ${GALLERY_URL}/sitemap.xml
+Host: ${GALLERY_URL}
+`
+}
 
 function generateSitemap(imageResults: any) {
   const resources = imageResults?.resources || []
@@ -75,19 +84,13 @@ ${allPages
   return sitemap
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-  const imageResults = await getResults()
-  const sitemap = generateSitemap(imageResults)
-
-  res.setHeader('Content-Type', 'text/xml')
-  res.write(sitemap)
-  res.end()
-
-  return {
-    props: {},
-  }
+async function main() {
+  const publicDir = path.join(process.cwd(), 'public')
+  fs.writeFileSync(path.join(publicDir, 'robots.txt'), generateRobots())
+  fs.writeFileSync(
+    path.join(publicDir, 'sitemap.xml'),
+    generateSitemap(await getResults())
+  )
 }
 
-export default function Sitemap() {
-  return null
-}
+main()
