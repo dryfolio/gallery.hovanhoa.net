@@ -25,7 +25,7 @@ The gallery supports:
 | Animations | [Framer Motion](https://www.framer.com/motion/) |
 | UI primitives | [Headless UI](https://headlessui.com/), [Heroicons](https://heroicons.com/) |
 | Swipe gestures | [react-swipeable](https://github.com/FormidableLabs/react-swipeable) |
-| Hosting | [Vercel](https://vercel.com/) |
+| Hosting | [Cloudflare Workers](https://workers.cloudflare.com/) (static assets) |
 
 ## Project structure
 
@@ -117,14 +117,14 @@ components/SharedModal.tsx       — full-screen viewer with keyboard (← →, 
 
 ```bash
 npm run dev      # Start the Next.js development server (http://localhost:3000)
-npm run build    # Production build — fetches images from Cloudinary and generates all static pages
-npm run start    # Serve the production build locally
+npm run build    # Static export to out/ — fetches images from Cloudinary and generates all pages
+npx wrangler dev # Serve out/ locally the way Cloudflare does
 npm run lint     # Run ESLint
 ```
 
 ## Build cache
 
-`utils/images.cache.json` caches the Cloudinary API response. If the file exists, the build reads from it instead of calling the Cloudinary API — which is useful in environments with unreliable outbound network access (e.g. Vercel's build environment in some regions).
+`utils/images.cache.json` caches the Cloudinary API response. If the file exists, the build reads from it instead of calling the Cloudinary API — which is useful in environments with unreliable outbound network access (e.g. a CI build environment).
 
 To refresh the cache locally, run:
 
@@ -153,6 +153,10 @@ Replace `<NAME>`, `<KEY>`, `<SECRET>`, and `<FOLDER>` with your Cloudinary crede
 
 ## Deployment
 
-The site is deployed on Vercel. Any push to `main` triggers a production build. No environment variables need to be set beyond the four listed above — Vercel handles everything else.
+The site is a static export (`out/`) served by Cloudflare Workers static assets on `gallery.hovanhoa.net` (see `wrangler.jsonc`). Pushing to `main` does **not** deploy — deploy manually:
 
-If the Cloudinary API is unreliable during Vercel builds, commit a fresh `images.cache.json` (see above) before pushing, and the build will use it instead.
+```bash
+npm run build && npx wrangler deploy
+```
+
+The photo list is read from Cloudinary at build time, so after uploading new photos just rebuild and deploy. If the Cloudinary API is unreliable during the build, use a fresh `images.cache.json` (see above).

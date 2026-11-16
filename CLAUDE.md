@@ -7,8 +7,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```bash
 npm run dev      # Start development server
 npm run build    # Production build (fetches images from Cloudinary at build time)
-npm run start    # Start production server
+npx wrangler dev # Serve the out/ static export locally
 npm run lint     # Run ESLint
+npm run build && npx wrangler deploy  # Deploy to Cloudflare (main does not auto-deploy)
 ```
 
 There are no tests in this project.
@@ -25,7 +26,7 @@ CLOUDINARY_FOLDER=    # Cloudinary folder path containing gallery images
 
 ### Build cache
 
-`utils/images.cache.json` caches the Cloudinary image list. If present, the build uses it instead of calling the Cloudinary API — useful when the build environment (e.g., Vercel) has unreliable network access to Cloudinary.
+`utils/images.cache.json` caches the Cloudinary image list. If present, the build uses it instead of calling the Cloudinary API — useful when the build environment (e.g., CI) has unreliable network access to Cloudinary.
 
 To refresh the cache locally:
 ```bash
